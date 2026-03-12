@@ -7,9 +7,46 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="center">
-    <h1>piss on the world. hell.</h1>
+
+  <!-- welcome popup -->
+  <div id="popup" class="popup-overlay">
+    <div class="popup-box">
+      <p>🔥 WELCOME TO MY WEBSITE 🔥</p>
+      <button onclick="document.getElementById('popup').style.display='none'">OK COOL</button>
+    </div>
   </div>
+
+  <!-- visitor counter -->
+  <div class="visitor-counter">👁️ You are visitor #<span id="visit-count">000001</span></div>
+
+  <!-- under construction badge -->
+  <img class="under-construction" src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" alt="under construction" />
+
+  <!-- marquee -->
+  <marquee class="marquee-text" behavior="scroll" direction="left" scrollamount="8">
+    🔥 WELCOME TO MY ORPHANAGE 🔥 &nbsp;&nbsp;&nbsp; COOL ORPHANAGE !!!!!! &nbsp;&nbsp;&nbsp; YOU ARE SO LUCKY TO BE HERE &nbsp;&nbsp;&nbsp; 🌍💥 EARTH EXPLOD 💥🌍 &nbsp;&nbsp;&nbsp; HI SHIRO &nbsp;&nbsp;&nbsp; 🔥 FUCK MY LIFE 🔥&nbsp;&nbsp;&nbsp; please send me dollars &nbsp;&nbsp;&nbsp; 10 dollars is ok &nbsp;&nbsp;&nbsp; HELLO SHIRO &nbsp;&nbsp;&nbsp; i pee blood sometimes
+  </marquee>
+
+  <!-- main hi -->
+  <div class="center">
+    <h1 id="hi" onclick="growHi()">hi</h1>
+  </div>
+
+  <!-- click hint -->
+  <div class="click-hint" id="click-hint">👆 click the hi</div>
+
+  <!-- do not press button -->
+  <button class="do-not-press" onclick="spawnEarths()">⛔ DO NOT PRESS ⛔</button>
+
+  <!-- web badges -->
+  <div class="badges">
+    <img src="https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif" alt="cool" title="COOL SITE" />
+    <img src="https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif" alt="award" title="BEST WEBSITE" />
+  </div>
+
+  <canvas id="trail-canvas"></canvas>
+
+  <img class="earth-gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmN3dTN4MWZkMHpoMXpiaDZidW8wYWF1a2M0ZTN3a21wOGhsbnV4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MaPQMg0g1DKwuBHEhc/giphy.gif" alt="exploding earth" />
 
   <div class="flames">
     <div class="flame-row">
@@ -31,5 +68,106 @@
       <div class="flame f16"></div>
     </div>
   </div>
+
+  <script>
+    const base = 1337420;
+    document.getElementById('visit-count').textContent = (base + Math.floor(Math.random() * 99)).toString().padStart(7, '0');
+
+    let hiSize = 20;
+    let clickCount = 0;
+    function growHi() {
+      clickCount++;
+      hiSize = Math.min(hiSize + 3, 80);
+      document.getElementById('hi').style.fontSize = hiSize + 'vw';
+      if (clickCount >= 3) document.getElementById('click-hint').style.display = 'none';
+    }
+
+    function spawnEarths() {
+      for (let i = 0; i < 5; i++) {
+        const img = document.createElement('img');
+        img.src = 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmN3dTN4MWZkMHpoMXpiaDZidW8wYWF1a2M0ZTN3a21wOGhsbnV4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MaPQMg0g1DKwuBHEhc/giphy.gif';
+        img.style.cssText = `
+          position: fixed;
+          width: ${60 + Math.random() * 100}px;
+          height: ${60 + Math.random() * 100}px;
+          border-radius: 50%;
+          top: ${Math.random() * 70}vh;
+          left: ${Math.random() * 85}vw;
+          z-index: 999;
+          object-fit: cover;
+          pointer-events: none;
+        `;
+        document.body.appendChild(img);
+        setTimeout(() => img.remove(), 4000);
+      }
+    }
+
+    const canvas = document.getElementById('trail-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    let particles = [];
+    window.addEventListener('mousemove', (e) => {
+      for (let i = 0; i < 3; i++) {
+        particles.push({
+          x: e.clientX,
+          y: e.clientY,
+          size: Math.random() * 10 + 4,
+          life: 1,
+          color: ['#ffff00','#ff8800','#ffffff','#ff4400'][Math.floor(Math.random()*4)],
+          vx: (Math.random() - 0.5) * 3,
+          vy: (Math.random() - 0.5) * 3,
+        });
+      }
+    });
+
+    function animateTrail() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles = particles.filter(p => p.life > 0);
+      for (const p of particles) {
+        ctx.save();
+        ctx.globalAlpha = p.life;
+        ctx.fillStyle = p.color;
+        ctx.font = `${p.size * 2}px serif`;
+        ctx.fillText('★', p.x, p.y);
+        ctx.restore();
+        p.life -= 0.04;
+        p.x += p.vx;
+        p.y += p.vy;
+      }
+      requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+
+    function fart() {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const actx = new AudioCtx();
+      const buf = actx.createBuffer(1, actx.sampleRate * 0.45, actx.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < data.length; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 1.5);
+      }
+      const src = actx.createBufferSource();
+      src.buffer = buf;
+      const filter = actx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 280 + Math.random() * 180;
+      src.connect(filter);
+      filter.connect(actx.destination);
+      src.start();
+    }
+    document.addEventListener('click', (e) => {
+      const skip = ['hi', 'popup', 'trail-canvas'];
+      if (!skip.includes(e.target.id) && !e.target.classList.contains('do-not-press') && !e.target.classList.contains('popup-box') && e.target.tagName !== 'BUTTON') {
+        fart();
+      }
+    });
+  </script>
 </body>
 </html>
