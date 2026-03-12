@@ -29,9 +29,26 @@ h1 {
   text-transform: lowercase;
   letter-spacing: -0.02em;
   user-select: none;
+  cursor: pointer;
+  transition: font-size 0.15s ease;
 }
 
-/* FLAMES */
+h1:hover {
+  color: #ffff00;
+}
+
+.earth-gif {
+  position: fixed;
+  top: 12px;
+  right: 18px;
+  width: 230px;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 50%;
+  z-index: 10;
+  transform: rotate(-8deg);
+}
+
 .flames {
   position: fixed;
   bottom: 0;
@@ -86,4 +103,167 @@ h1 {
   50%  { transform: scaleX(1.1) scaleY(0.97) skewX(2deg);   opacity: 0.85;}
   75%  { transform: scaleX(0.95) scaleY(1.08) skewX(-1deg); opacity: 1;   }
   100% { transform: scaleX(1.05) scaleY(0.95) skewX(3deg);  opacity: 0.9; }
+}
+
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-box {
+  background: #ffff00;
+  border: 6px solid black;
+  padding: 30px 40px;
+  text-align: center;
+  font-family: Impact, sans-serif;
+  font-size: 1.6rem;
+  color: black;
+  box-shadow: 8px 8px 0 black;
+  animation: popIn 0.3s ease-out;
+}
+
+.popup-box p {
+  margin-bottom: 18px;
+}
+
+.popup-box button {
+  background: black;
+  color: #ffff00;
+  border: none;
+  font-family: Impact, sans-serif;
+  font-size: 1.2rem;
+  padding: 10px 28px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+}
+
+.popup-box button:hover {
+  background: #cc0000;
+  color: white;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.visitor-counter {
+  position: fixed;
+  bottom: 195px;
+  left: 12px;
+  background: black;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  padding: 5px 10px;
+  border: 2px solid #00ff00;
+  z-index: 20;
+  letter-spacing: 0.05em;
+}
+
+/* UNDER CONSTRUCTION GIF */
+.under-construction {
+  position: fixed;
+  bottom: 195px;
+  right: 18px;
+  width: 120px;
+  z-index: 20;
+  image-rendering: pixelated;
+}
+
+/* MARQUEE */
+.marquee-text {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: black;
+  color: #ffff00;
+  font-family: Impact, sans-serif;
+  font-size: 1rem;
+  padding: 5px 0;
+  z-index: 30;
+  letter-spacing: 0.08em;
+}
+
+/* CLICK HINT */
+.click-hint {
+  position: fixed;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  color: #ffff00;
+  font-size: 1rem;
+  font-family: Impact, sans-serif;
+  animation: blinky 0.7s step-end infinite;
+  z-index: 20;
+  pointer-events: none;
+}
+
+@keyframes blinky {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* DO NOT PRESS BUTTON */
+.do-not-press {
+  position: fixed;
+  bottom: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffff00;
+  color: black;
+  border: 4px solid black;
+  font-family: Impact, sans-serif;
+  font-size: 1rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 20;
+  letter-spacing: 0.05em;
+  box-shadow: 4px 4px 0 black;
+  animation: wiggle 1.5s ease-in-out infinite;
+}
+
+.do-not-press:hover {
+  background: black;
+  color: #ffff00;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: translateX(-50%) rotate(0deg); }
+  25%       { transform: translateX(-50%) rotate(-2deg); }
+  75%       { transform: translateX(-50%) rotate(2deg); }
+}
+
+/* WEB BADGES */
+.badges {
+  position: fixed;
+  top: 38px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 20;
+}
+
+.badges img {
+  width: 80px;
+  height: 40px;
+  object-fit: cover;
+  border: 2px solid black;
+  image-rendering: pixelated;
+}
+
+/* CURSOR TRAIL CANVAS */
+#trail-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
 }
