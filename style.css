@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #cc0000;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Impact, 'Arial Black', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  color: black;
+  font-size: 20vw;
+  text-transform: lowercase;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+/* FLAMES */
+.flames {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.flame-row {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 0 10px;
+}
+
+.flame {
+  width: 60px;
+  height: 120px;
+  background: radial-gradient(ellipse at 50% 100%, #fff700 0%, #ff8c00 35%, #ff2800 60%, #8b0000 90%, transparent 100%);
+  border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+  animation: flicker 0.6s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+  filter: blur(1px);
+  opacity: 0.95;
+}
+
+.f1  { height: 100px; width: 55px; animation-delay: 0.0s; animation-duration: 0.55s; }
+.f2  { height: 140px; width: 65px; animation-delay: 0.1s; animation-duration: 0.7s;  }
+.f3  { height: 90px;  width: 50px; animation-delay: 0.2s; animation-duration: 0.5s;  }
+.f4  { height: 160px; width: 70px; animation-delay: 0.05s; animation-duration: 0.65s; }
+.f5  { height: 110px; width: 58px; animation-delay: 0.3s; animation-duration: 0.6s;  }
+.f6  { height: 130px; width: 62px; animation-delay: 0.15s; animation-duration: 0.75s; }
+.f7  { height: 155px; width: 68px; animation-delay: 0.0s;  animation-duration: 0.5s;  }
+.f8  { height: 95px;  width: 52px; animation-delay: 0.25s; animation-duration: 0.68s; }
+.f9  { height: 145px; width: 66px; animation-delay: 0.1s;  animation-duration: 0.72s; }
+.f10 { height: 105px; width: 56px; animation-delay: 0.35s; animation-duration: 0.58s; }
+.f11 { height: 120px; width: 60px; animation-delay: 0.2s;  animation-duration: 0.62s; }
+.f12 { height: 150px; width: 64px; animation-delay: 0.08s; animation-duration: 0.53s; }
+.f13 { height: 85px;  width: 48px; animation-delay: 0.4s;  animation-duration: 0.67s; }
+.f14 { height: 135px; width: 63px; animation-delay: 0.18s; animation-duration: 0.71s; }
+.f15 { height: 115px; width: 59px; animation-delay: 0.28s; animation-duration: 0.56s; }
+.f16 { height: 125px; width: 61px; animation-delay: 0.12s; animation-duration: 0.64s; }
+
+@keyframes flicker {
+  0%   { transform: scaleX(1)   scaleY(1)    skewX(0deg);   opacity: 0.9; }
+  25%  { transform: scaleX(0.9) scaleY(1.05) skewX(-3deg);  opacity: 1;   }
+  50%  { transform: scaleX(1.1) scaleY(0.97) skewX(2deg);   opacity: 0.85;}
+  75%  { transform: scaleX(0.95) scaleY(1.08) skewX(-1deg); opacity: 1;   }
+  100% { transform: scaleX(1.05) scaleY(0.95) skewX(3deg);  opacity: 0.9; }
+}
